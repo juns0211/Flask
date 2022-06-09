@@ -1,13 +1,15 @@
 from http.client import responses
 from urllib import response
-from flask import Flask, request, make_response, redirect, abort
+from flask import Flask, request, make_response, redirect, abort, render_template
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 @app.route('/')
 def index():
-    user_agent = request.headers.get('User-Agent')
-    return f'<p>Your browser is {user_agent}</p>'
+    # user_agent = request.headers.get('User-Agent')
+    # return f'<p>Your browser is {user_agent}</p>'
 
     # 建立status_code == 400
     #return '<h1>bad request</h1>', 400
@@ -20,9 +22,13 @@ def index():
     # 轉址
     #return redirect('http://google.com')
 
+    # 轉譯模版
+    return render_template('index.html')
+
 @app.route('/user/<name>')
 def user(name):
-    return f"<h1>HelloWorld {name}</h1>"
+    #return f"<h1>HelloWorld {name}</h1>"
+    return render_template('user.html', name=name)
 
 @app.route('/get_user/<id>')
 def get_user(id):

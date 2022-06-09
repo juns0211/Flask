@@ -1,0 +1,16 @@
+<!--過濾器
+safe > 在不轉義的情況下轉譯值
+capitalize > 值惖第一個字元大寫, 其他字元小寫
+lower > 將值改為小寫
+upper > 將值改為大寫
+title > 值的每一個單字的第一個字母大寫
+trim > 移除值的前面與後面的空白字元
+striptags > 在轉譯前移除值的所有HTML標籤
+-->
+{% if name %}
+    <h1>Hello, {{name|title}}!</h1>
+    <!--呼叫其他模版 include-->
+    {% include 'common.html' %}
+{% else %}
+    <h1>Hello, All!</h1>
+{% endif %}
