@@ -2,9 +2,12 @@ from http.client import responses
 from urllib import response
 from flask import Flask, request, make_response, redirect, abort, render_template
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+from datetime import datetime
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 @app.route('/')
 def index():
@@ -23,7 +26,7 @@ def index():
     #return redirect('http://google.com')
 
     # 轉譯模版
-    return render_template('index.html')
+    return render_template('index.html', current_time=datetime.utcnow())
 
 @app.route('/user/<name>')
 def user(name):
@@ -32,10 +35,10 @@ def user(name):
 
 @app.route('/get_user/<id>')
 def get_user(id):
-    user = load_user(id)
-    if not user:
+    name = load_user(id)
+    if not name:
         abort(404)
-    return f'<h1>hello, 西擺{user}'
+    return render_template('get_user.html', name=name)
 
 
 def load_user(id):
@@ -43,3 +46,12 @@ def load_user(id):
     if id not in user_data.keys():
         return None
     return user_data[id]
+
+#自訂錯誤網頁
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+#自訂錯誤網頁
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500

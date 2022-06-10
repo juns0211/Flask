@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        {% if name %}
+            <h1>Hello, 西擺{{name|title}}!</h1>
+            {% else %}
+            <h1>Hello, All!</h1>
+            {% endif %}
+        </div>
+    <!--呼叫其他模版 include-->
+    {% include 'common.html' %}
+</div>
+{% endblock %}
