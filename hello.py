@@ -1,13 +1,22 @@
 from http.client import responses
+import mimetypes
 from urllib import response
-from flask import Flask, request, make_response, redirect, abort, render_template
+from flask import Flask, jsonify, request, make_response, redirect, abort, render_template, Response
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from datetime import datetime
+from flask_swagger import swagger
+import json
+import pymysql
+from flask_sqlalchemy import SQLAlchemy
+from db import sql_db
 
-app = Flask(__name__)
+app = Flask('hello')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:juns1984@localhost:3306/mydb"
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
@@ -55,3 +64,27 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
+
+#開API
+@app.route("/test", methods=['POST'])
+def test():
+    try:
+        insert = request.get_json()
+        user = insert['name']
+        if insert.get('id'):
+            id = insert['id']
+            obj = sql_db.mysql_db(**{'id':id, 'name':user})
+        else:
+            obj = sql_db.mysql_db(**{'name':user})
+        sql_db.db.session.add(obj)
+        sql_db.db.session.commit()
+        return Response(json.dumps({'success':True, 'message':'', 'data':{'name':user, 'id':id} if insert.get('id') else {'name':user}}, ensure_ascii=False), status=200, mimetype='application/json')
+    except KeyError as e:
+        print(e)
+        return Response(json.dumps({'success':False, 'message':'請檢查傳入參數是否缺少', 'data':{}}, ensure_ascii=False),status=401, mimetype='application/json')
+    except Exception as e:
+        print(e)
+        return Response(json.dumps({'success':False, 'message':'未知錯誤', 'data':{}}, ensure_ascii=False),status=401, mimetype='application/json')
+
+if __name__ == '__main__':
+    app.run(debug=True)
