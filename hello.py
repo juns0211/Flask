@@ -1,6 +1,3 @@
-from http.client import responses
-import mimetypes
-from urllib import response
 from flask import Flask, jsonify, request, make_response, redirect, abort, render_template, Response
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment

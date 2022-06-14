@@ -5,8 +5,8 @@ from hello import db
 
 class mysql_db(db.Model):
     __tablename__ = 'test'
-    #API欄位
-    id = db.Column(db.Integer, primary_key=True)
+    #API欄位 autoincrement自動產生值
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.Text)
 
     def to_dict(self):
