@@ -1,5 +1,5 @@
 
-from hello import db
+from main_api.main import db
 
 
 
