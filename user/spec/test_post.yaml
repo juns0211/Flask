@@ -1,5 +1,5 @@
 tags:
-  - TEST_API用戶註冊接口
+  - User Registration
 description:
     用戶註冊接口，json格式
 parameters:
@@ -7,7 +7,7 @@ parameters:
     in: body
     required: true
     schema:
-      id: user_register
+      id: user_registration
       required:
         - name
       properties:
@@ -19,7 +19,7 @@ responses:
   200:
     description: '回傳值'
     schema:
-      id: user_register_return
+      id: user_registration_return
       required:
         - success
         - message

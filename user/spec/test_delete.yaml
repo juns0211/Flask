@@ -1,5 +1,5 @@
 tags:
-  - TEST_API用戶刪除接口
+  - User Delete
 description:
     用戶刪除接口，json格式，透過ID查詢, 可用list同時傳入多組ID。
 parameters:

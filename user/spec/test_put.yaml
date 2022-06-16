@@ -1,5 +1,5 @@
 tags:
-  - TEST_API用戶更新接口
+  - User Update
 description:
     用戶註冊更新接口，json格式，透過ID查詢，NAME為需要修改的會員名稱。
 parameters:
