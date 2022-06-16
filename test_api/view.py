@@ -61,16 +61,19 @@ class test_view(MethodView):
     def delete(self):
         '''file: ./spec/test_delete.yaml'''
         try:
-            ids = request.get_json()
-            if not ids:
-                return Response(json.dumps({'success':False, 'message':'未傳入值', 'data':{}}, ensure_ascii=False), status=200, mimetype='application/json')
+            result = []
+            insert = request.get_json()
+            ids = insert['id']
             for id in ids:
-                test_db.mysql_db.query.filter_by(id=id).delete()
+                resp = test_db.mysql_db.query.filter_by(id=id)
+                if resp.first():
+                    result.append({'id':resp.first().id, 'name':resp.first().name})
+                    resp.delete()
             test_db.db.session.commit()
-            return Response(json.dumps({'success':True, 'message':'刪除成功', 'data':{}}, ensure_ascii=False), status=200, mimetype='application/json')
+            return Response(json.dumps({'success':True, 'message':'刪除成功', 'data':result}, ensure_ascii=False), status=200, mimetype='application/json')
         except KeyError:
             print('\n' + traceback.format_exc())
-            return Response(json.dumps({'success':False, 'message':'請檢查傳入參數是否缺少', 'data':{}}, ensure_ascii=False),status=401, mimetype='application/json')
+            return Response(json.dumps({'success':False, 'message':'請檢查傳入參數是否缺少', 'data':[]}, ensure_ascii=False),status=401, mimetype='application/json')
         except Exception:
             print('\n' + traceback.format_exc())
-            return Response(json.dumps({'success':False, 'message':'未知錯誤', 'data':{}}, ensure_ascii=False),status=401, mimetype='application/json')
+            return Response(json.dumps({'success':False, 'message':'未知錯誤', 'data':[]}, ensure_ascii=False),status=401, mimetype='application/json')

@@ -5,7 +5,7 @@ description:
 parameters:
   - name: body
     in: body
-    required: false
+    required: true
     schema:
       id: 用戶更新
       required:
