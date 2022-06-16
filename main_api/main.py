@@ -82,7 +82,7 @@ from swagger_api.url import swagger_api_app
 app.register_blueprint(swagger_api_app, url_prefix='/api')
 
 #test_api網頁
-from test_api.url import test_api_app
+from user.url import test_api_app
 app.register_blueprint(test_api_app, url_prefix='/api')
 
 # if __name__ == '__main__':

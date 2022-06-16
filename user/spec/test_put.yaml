@@ -7,7 +7,7 @@ parameters:
     in: body
     required: true
     schema:
-      id: 用戶更新
+      id: user_update
       required:
         - id
         - name
@@ -23,7 +23,7 @@ responses:
   200:
     description: '回傳值'
     schema:
-      id: 用戶注冊回傳值
+      id: user_update_return
       required:
         - success
         - message
@@ -37,9 +37,3 @@ responses:
           description: 訊息
         data:
           type: object
-          id:
-            type: integer
-            description: 註冊會員ID
-          name:
-            type: string
-            description: 註冊會員姓名

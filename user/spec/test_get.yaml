@@ -7,11 +7,20 @@ parameters:
     in: query
     type: integer
     reuired: true
+    schema:
+      id: user_search
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          dexcription: 會員ID.
 
 responses:
   200:
     description: ''
     schema:
+      id: user_search_return
       required:
         - success
         - message
@@ -24,7 +33,3 @@ responses:
           type: string
         data:
           type: object
-          id:
-            type: integer
-          name:
-            type: string
