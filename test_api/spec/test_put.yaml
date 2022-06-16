@@ -1,0 +1,45 @@
+tags:
+  - TEST_API用戶更新接口
+description:
+    用戶註冊更新接口，json格式，透過ID查詢，NAME為需要修改的會員名稱。
+parameters:
+  - name: body
+    in: body
+    required: false
+    schema:
+      id: 用戶更新
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          dexcription: 會員ID.
+        name:
+          type: string
+          description: 會員姓名.
+
+responses:
+  200:
+    description: '回傳值'
+    schema:
+      id: 用戶注冊回傳值
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+          description: 成功與否
+        message: 
+          type: string
+          description: 訊息
+        data:
+          type: object
+          id:
+            type: integer
+            description: 註冊會員ID
+          name:
+            type: string
+            description: 註冊會員姓名

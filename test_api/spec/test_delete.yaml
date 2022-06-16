@@ -1,0 +1,38 @@
+tags:
+  - TEST_API用戶刪除接口
+description:
+    用戶註冊刪除接口，json格式，透過ID查詢, 可同時傳入多組ID。
+parameters:
+  - name: body
+    in: body
+    required: false
+    schema:
+      id: 用戶刪除
+      # required:
+      #   - id
+      # properties:
+      #   id:
+      #     type: integer
+      #     dexcription: 會員ID.
+      type: array
+      items:
+        type: integer
+
+responses:
+  200:
+    description: '回傳值'
+    schema:
+      id: 用戶注冊回傳值
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+          description: 成功與否
+        message: 
+          type: string
+          description: 訊息
+        data:
+          type: object

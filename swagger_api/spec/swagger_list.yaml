@@ -1,0 +1,31 @@
+
+tags:
+  - SWAGGER測試查詢接口
+description:
+    SWAGGER測試查詢接口，json格式
+parameters:
+  - name: id
+    in: query
+    type: integer
+    reuired: true
+
+responses:
+  200:
+    description: ''
+    schema:
+      required:
+        - success
+        - message
+        - data
+      type: object
+      properties:
+        success:
+          type: boolean
+        message: 
+          type: string
+        data:
+          type: object
+          id:
+            type: integer
+          name:
+            type: string

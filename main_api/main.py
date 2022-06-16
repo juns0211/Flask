@@ -2,18 +2,30 @@ from flask import Flask, jsonify, request, make_response, redirect, abort, rende
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from datetime import datetime
-from flask_swagger import swagger
 import pymysql
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flasgger import Swagger
+from flask_swagger import swagger
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:juns1984@localhost:3306/mydb"
+app.config['SWAGGER'] = {
+                            "title": "Swagger API",
+                            "description": "Flask測試專用",
+                            "version": "1.0.0",
+                            "termsOfService": "",
+                            "hide_top_bar": True
+                        }
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+# 建立swagger ui = localhost:5000/apidocs
+Swagger(app)
+# ORM工具
 db = SQLAlchemy(app)
-from test_api.test import test_api_app
-app.register_blueprint(test_api_app, url_prefix='/api')
+# 更新資料庫工具
+migrate = Migrate(app, db)
 
 @app.route('/')
 def index():
@@ -61,6 +73,17 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
+
+#swagger_api網頁
+# @app.route("/spec")
+# def swagger_spec():
+#     return jsonify(swagger(app))
+from swagger_api.url import swagger_api_app
+app.register_blueprint(swagger_api_app, url_prefix='/api')
+
+#test_api網頁
+from test_api.url import test_api_app
+app.register_blueprint(test_api_app, url_prefix='/api')
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
