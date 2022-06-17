@@ -3,7 +3,7 @@ tags:
 description:
     用戶刪除接口，json格式，透過ID查詢, 可用list同時傳入多組ID。
 parameters:
-  - name: body
+  - name: json
     in: body
     required: true
     schema:

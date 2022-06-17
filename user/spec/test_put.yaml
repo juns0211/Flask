@@ -3,7 +3,7 @@ tags:
 description:
     用戶註冊更新接口，json格式，透過ID查詢，NAME為需要修改的會員名稱。
 parameters:
-  - name: body
+  - name: json
     in: body
     required: true
     schema:

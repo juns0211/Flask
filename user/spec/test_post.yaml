@@ -3,7 +3,7 @@ tags:
 description:
     用戶註冊接口，json格式
 parameters:
-  - name: body
+  - name: json
     in: body
     required: true
     schema:
