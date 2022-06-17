@@ -25,7 +25,6 @@ responses:
         - success
         - message
         - data
-      type: object
       properties:
         success:
           type: boolean

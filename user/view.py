@@ -38,6 +38,7 @@ class test_view(MethodView):
         except Exception:
             print('\n' + traceback.format_exc())
             return Response(json.dumps({'success':False, 'message':'未知錯誤', 'data':{}}, ensure_ascii=False),status=401, mimetype='application/json')
+            
     def put(self):
         '''file: ./spec/test_put.yaml'''
         try:
