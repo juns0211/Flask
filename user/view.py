@@ -1,8 +1,9 @@
-from flask import request, Response
+from flask import request, Response, session
 from flask.views import MethodView
 from . import user_db
 import json, traceback
 
+Session = session
 
 #API
 class user_view(MethodView):
@@ -14,8 +15,8 @@ class user_view(MethodView):
             # result = sql_db.db.session.query(sql_db.mysql_db).filter_by(id=id).first()
             resp = user_db.mysql_db.query.filter_by(id=id).first()
             if resp:
-                data['id'] = resp.id
-                data['name'] = resp.name
+                data['id'] = Session['id'] = resp.id
+                data['name'] = Session['name'] = resp.name
             return Response(json.dumps({'success':True, 'message':'', 'data':data}, ensure_ascii=False), status=200, mimetype='application/json')
         except KeyError:
             print('\n' + traceback.format_exc())

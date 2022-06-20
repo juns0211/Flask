@@ -1,7 +1,7 @@
 from pathlib import Path
 import yaml
 
-path = Path('config/config.yaml')
+path = Path('configs/config.yaml')
 
 # 讀取YAML
 def load_setting():

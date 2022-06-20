@@ -5,7 +5,8 @@ from flasgger import Swagger
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 from flask_migrate import Migrate
-from config import config
+from configs import config
+import os
 
 default_setting = config.load_setting()
 sqlalchemy_track_modifications = default_setting['config']['SQLALCHEMY_TRACK_MODIFICATIONS']
@@ -19,6 +20,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = sqlalchemy_track_modifications
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{acc}:{pw}@{url_port}/{db_name}"
 app.config['SWAGGER'] = swagger_setting
+app.config['SECRET_KEY'] = os.urandom(24)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 # 建立swagger ui = localhost:5000/apidocs

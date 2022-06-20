@@ -2,6 +2,7 @@ from flask import jsonify, request, make_response, redirect, abort, render_templ
 from datetime import datetime
 from flask_swagger import swagger
 from setting import app
+from user.view import Session
 
 
 @app.route('/')
@@ -21,6 +22,7 @@ def index():
     #return redirect('http://google.com')
 
     # 轉譯模版
+    print(Session)
     return render_template('index.html', current_time=datetime.utcnow())
 
 @app.route('/user/<name>')
