@@ -5,17 +5,20 @@ from flasgger import Swagger
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 from flask_migrate import Migrate
+from config import config
+
+default_setting = config.load_setting()
+sqlalchemy_track_modifications = default_setting['config']['SQLALCHEMY_TRACK_MODIFICATIONS']
+acc = default_setting['config']['db']['acc']
+url_port = default_setting['config']['db']['url_port']
+pw = default_setting['config']['db']['pw']
+db_name = default_setting['config']['db']['db_name']
+swagger_setting = default_setting['config']['swagger_setting']
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:juns1984@localhost:3306/mydb"
-app.config['SWAGGER'] = {
-                            "title": "Swagger API",
-                            "description": "Flask測試專用",
-                            "version": "1.0.0",
-                            "termsOfService": "",
-                            "hide_top_bar": True
-                        }
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = sqlalchemy_track_modifications
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{acc}:{pw}@{url_port}/{db_name}"
+app.config['SWAGGER'] = swagger_setting
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 # 建立swagger ui = localhost:5000/apidocs

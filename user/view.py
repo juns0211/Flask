@@ -9,12 +9,14 @@ class user_view(MethodView):
     def get(self):
         '''file: ./spec/test_get.yaml'''
         try:
+            data = {}
             id = request.args['id']
             # result = sql_db.db.session.query(sql_db.mysql_db).filter_by(id=id).first()
-            result = user_db.mysql_db.query.filter_by(id=id).first()
-            if not result:
-                return Response(json.dumps({'success':True, 'message':'', 'data':{}}, ensure_ascii=False), status=200, mimetype='application/json')
-            return Response(json.dumps({'success':True, 'message':'', 'data':{'id':result.id, 'name':result.name}}, ensure_ascii=False), status=200, mimetype='application/json')
+            resp = user_db.mysql_db.query.filter_by(id=id).first()
+            if resp:
+                data['id'] = resp.id
+                data['name'] = resp.name
+            return Response(json.dumps({'success':True, 'message':'', 'data':data}, ensure_ascii=False), status=200, mimetype='application/json')
         except KeyError:
             print('\n' + traceback.format_exc())
             return Response(json.dumps({'success':False, 'message':'請檢查傳入參數是否缺少', 'data':{}}, ensure_ascii=False),status=401, mimetype='application/json')
