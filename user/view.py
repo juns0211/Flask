@@ -5,7 +5,7 @@ import json, traceback
 
 
 #API
-class test_view(MethodView):
+class user_view(MethodView):
     def get(self):
         '''file: ./spec/test_get.yaml'''
         try:

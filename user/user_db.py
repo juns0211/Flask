@@ -1,5 +1,5 @@
 
-from main_api.main import db
+from setting import db
 
 
 
