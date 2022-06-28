@@ -1,7 +1,7 @@
 tags:
   - User Registration
 description:
-    用戶註冊接口，json格式
+    用戶查詢接口，json格式
 parameters:
   - name: json
     in: body
@@ -10,10 +10,18 @@ parameters:
       id: user_registration
       required:
         - name
+        - acc
+        - password
       properties:
         name:
           type: string
-          description: 姓名.
+          description: 姓名
+        acc:
+          type: string
+          description: 帳號
+        password:
+          type: string
+          description: 密碼
 
 responses:
   200:

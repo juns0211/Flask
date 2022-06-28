@@ -9,11 +9,11 @@ parameters:
     schema:
       id: user_delete
       required:
-        - id
+        - acc
       properties:
-        id:
+        acc:
           type: array
-          dexcription: 會員ID.
+          dexcription: 帳號.
           items:
             type: integer
 

@@ -3,17 +3,17 @@ tags:
 description:
     用戶查詢接口，json格式
 parameters:
-  - name: id
+  - name: acc
     in: query
-    type: integer
+    type: string
     reuired: true
     schema:
       id: user_search
       required:
-        - id
+        - acc
       properties:
-        id:
-          type: integer
+        acc:
+          type: string
           dexcription: 會員ID.
 
 responses:

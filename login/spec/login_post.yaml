@@ -1,21 +1,17 @@
 tags:
-  - User Update
+  - User Login
 description:
-    用戶註冊更新接口，json格式，透過ID查詢，NAME為需要修改的會員名稱。
+    用戶登入接口，json格式
 parameters:
   - name: json
     in: body
     required: true
     schema:
-      id: user_update
+      id: user_login
       required:
-        - name
         - acc
         - password
       properties:
-        name:
-          type: string
-          description: 會員姓名.
         acc:
           type: string
           description: 帳號
@@ -27,7 +23,7 @@ responses:
   200:
     description: '回傳值'
     schema:
-      id: user_update_return
+      id: user_login_return
       required:
         - success
         - message
@@ -35,9 +31,7 @@ responses:
       properties:
         success:
           type: boolean
-          description: 成功與否
         message: 
           type: string
-          description: 訊息
         data:
           type: object

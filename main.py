@@ -2,8 +2,9 @@ from flask import jsonify, request, make_response, redirect, abort, render_templ
 from datetime import datetime
 from flask_swagger import swagger
 from setting import app
-from user.view import Session
+from schedule.scheduler import scheduler
 
+print(scheduler.start())
 
 @app.route('/')
 def index():
@@ -22,7 +23,6 @@ def index():
     #return redirect('http://google.com')
 
     # 轉譯模版
-    print(Session)
     return render_template('index.html', current_time=datetime.utcnow())
 
 @app.route('/user/<name>')
@@ -60,9 +60,13 @@ def internal_server_error(e):
 from swagger_api.url import swagger_api_app
 app.register_blueprint(swagger_api_app, url_prefix='/api')
 
-#test_api網頁
+#user api
 from user.url import user_api_app
 app.register_blueprint(user_api_app, url_prefix='/api')
+
+#login api
+from login.url import login_api_app
+app.register_blueprint(login_api_app, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run(debug=True)
