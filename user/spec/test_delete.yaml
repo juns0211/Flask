@@ -15,7 +15,8 @@ parameters:
           type: array
           dexcription: 帳號.
           items:
-            type: integer
+            type: string
+            example: acc
 
 responses:
   200:

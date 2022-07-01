@@ -2,11 +2,12 @@ from flask import jsonify, request, make_response, redirect, abort, render_templ
 from datetime import datetime
 from flask_swagger import swagger
 from setting import app
-from schedule.scheduler import scheduler
+from flask_login import login_required, current_user
 
-print(scheduler.start())
 
 @app.route('/')
+# 欄截請求, 並將使用者送到登入網頁
+@login_required
 def index():
     # user_agent = request.headers.get('User-Agent')
     # return f'<p>Your browser is {user_agent}</p>'
@@ -21,16 +22,17 @@ def index():
 
     # 轉址
     #return redirect('http://google.com')
-
     # 轉譯模版
-    return render_template('index.html', current_time=datetime.utcnow())
+    return render_template('index.html', current_time=datetime.utcnow(), name=current_user.acc)
 
 @app.route('/user/<name>')
+@login_required
 def user(name):
     #return f"<h1>HelloWorld {name}</h1>"
     return render_template('user.html', name=name)
 
 @app.route('/get_user/<id>')
+@login_required
 def get_user(id):
     name = load_user(id)
     if not name:
@@ -64,9 +66,6 @@ app.register_blueprint(swagger_api_app, url_prefix='/api')
 from user.url import user_api_app
 app.register_blueprint(user_api_app, url_prefix='/api')
 
-#login api
-from login.url import login_api_app
-app.register_blueprint(login_api_app, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run(debug=True)

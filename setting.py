@@ -22,8 +22,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = sqlalchemy_track_modifications
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{acc}:{pw}@{url_port}/{db_name}"
 app.config['SWAGGER'] = swagger_setting
 app.config['SECRET_KEY'] = os.urandom(24)
-# session有效期為2小時
-app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(hours=2)
+# session有效期為1分鐘
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=1)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 # 建立swagger ui = localhost:5000/apidocs

@@ -15,6 +15,7 @@ parameters:
       properties:
         name:
           type: string
+          format: date
           description: 姓名
         acc:
           type: string

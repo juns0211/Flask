@@ -7,6 +7,13 @@
 {{ moment.include_moment() }}
 {% endblock %}
 
+<ul class="nav navbar-nav navbar-right">
+    {% if current_user.is_authenticated %}
+    <li><a href="{{ url_for('api.logout') }}">Log out</a></li>
+    {% else %}
+    <li><a href="{{ url_for('api.login') }}">Log in</a></li>
+    {% endif %}
+</ul>
 
 {% block navbar %}
 <div class="nabar navbar-inverse" role="navigation">
@@ -31,6 +38,12 @@
 
 {% block content %}
 <div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message}}
+    </div>
+    {% endfor %}
     {% block page_content %}{% endblock %}
 </div>
 {% endblock %}
