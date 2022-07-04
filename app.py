@@ -66,6 +66,9 @@ app.register_blueprint(swagger_api_app, url_prefix='/api')
 from user.url import user_api_app
 app.register_blueprint(user_api_app, url_prefix='/api')
 
+#login api
+from login.url import login_api_app
+app.register_blueprint(login_api_app)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -11,6 +11,7 @@ parameters:
       required:
         - acc
         - password
+        - remember_me
       properties:
         acc:
           type: string
@@ -18,6 +19,9 @@ parameters:
         password:
           type: string
           description: 密碼
+        remember_me:
+          type: boolean
+          description: 記住我
 
 responses:
   200:
