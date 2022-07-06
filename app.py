@@ -70,5 +70,9 @@ app.register_blueprint(user_api_app, url_prefix='/api')
 from login.url import login_api_app
 app.register_blueprint(login_api_app)
 
+#upload api
+from upload_data.url import upload_api_app
+app.register_blueprint(upload_api_app)
+
 if __name__ == '__main__':
     app.run(debug=True)

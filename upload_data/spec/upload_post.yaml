@@ -1,0 +1,29 @@
+tags:
+  - Update
+description:
+    上傳CSV
+consumes:
+  - multipart/form-data
+parameters:
+  - name: file
+    in: formData
+    name: file
+    type: file
+    required: true
+    description: name:str, acc:str , password:str
+
+responses:
+  200:
+    description: '回傳值'
+    schema:
+      id: upload_return
+      required:
+        - success
+        - message
+      properties:
+        success:
+          type: boolean
+          description: 成功與否
+        message: 
+          type: string
+          description: 訊息
