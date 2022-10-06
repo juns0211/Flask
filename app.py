@@ -4,6 +4,13 @@ from flask_swagger import swagger
 from setting import app
 from flask_login import login_required, current_user
 
+ALLOWED_IPS = ['192.168.1.', '127.0.0.1', '192.168.137.90']
+
+@app.before_request
+def limit_remote_addr():
+    client_ip = str(request.remote_addr)
+    if client_ip not in ALLOWED_IPS:
+        abort(403)
 
 @app.route('/')
 # 欄截請求, 並將使用者送到登入網頁
@@ -75,4 +82,4 @@ from upload_data.url import upload_api_app
 app.register_blueprint(upload_api_app)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
