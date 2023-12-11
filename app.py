@@ -3,6 +3,7 @@ from datetime import datetime
 from flask_swagger import swagger
 from setting import app
 from flask_login import login_required, current_user
+from setting import scheduler
 
 ALLOWED_IPS = ['192.168.1.', '127.0.0.1', '192.168.137.90']
 
@@ -81,5 +82,9 @@ app.register_blueprint(login_api_app)
 from upload_data.url import upload_api_app
 app.register_blueprint(upload_api_app)
 
+# 執行排程
+scheduler.init_app(app)
+scheduler.start()
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
