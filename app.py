@@ -5,17 +5,17 @@ from setting import app
 from flask_login import login_required, current_user
 from setting import scheduler
 
-ALLOWED_IPS = ['192.168.1.', '127.0.0.1', '192.168.137.90']
+# ALLOWED_IPS = ['192.168.1.', '127.0.0.1', '192.168.137.90']
 
-@app.before_request
-def limit_remote_addr():
-    client_ip = str(request.remote_addr)
-    if client_ip not in ALLOWED_IPS:
-        abort(403)
+# @app.before_request
+# def limit_remote_addr():
+#     client_ip = str(request.remote_addr)
+#     if client_ip not in ALLOWED_IPS:
+#         abort(403)
 
 @app.route('/')
 # 欄截請求, 並將使用者送到登入網頁
-@login_required
+#@login_required
 def index():
     # user_agent = request.headers.get('User-Agent')
     # return f'<p>Your browser is {user_agent}</p>'
@@ -29,9 +29,9 @@ def index():
     # return response
 
     # 轉址
-    #return redirect('http://google.com')
+    return redirect('http://google.com')
     # 轉譯模版
-    return render_template('index.html', current_time=datetime.utcnow(), name=current_user.acc)
+    #return render_template('index.html', current_time=datetime.utcnow(), name=current_user.acc)
 
 @app.route('/user/<name>')
 @login_required
@@ -87,4 +87,4 @@ scheduler.init_app(app)
 scheduler.start()
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
